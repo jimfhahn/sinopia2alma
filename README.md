@@ -1,4 +1,4 @@
-# sinopia2alma_processing
+# sinopia2alma
 
 # Alma RDF/XML 
 To generate RDF/XML for Alma Work or Instance start the binder and navigate to the notebooks. If posting to Alma, the system requires the Work resource to be sent in first before the Instance. Run the notebook for Work before Instance when posting to Alma.
