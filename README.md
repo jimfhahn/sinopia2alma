@@ -11,7 +11,7 @@ Note: In the notebook replace the URI with your sinopia Instance URI. The setup 
 # Alma RDF to OCLC (experimental)
 This is a pilot test to generate [OCLC RDF structure](https://help.oclc.org/Metadata_Services/WorldShare_Collection_Manager/Data_sync_collections/Prepare_your_data/Structure_BIBFRAME_data) from sinopia RDF. Available by way on an SRU query, examples in the rdf2oclc.ipynb notebook.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jimfhahn/sinopia2alma_processing/main)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jimfhahn/sinopia2alma/main)
 
 # Notebooks
 ## rdf2marcxml.ipynb
