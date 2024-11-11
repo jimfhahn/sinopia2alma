@@ -1,0 +1,3 @@
+*.xml
+*.rdf
+__pycache__/

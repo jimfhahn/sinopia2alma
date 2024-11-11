@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+           xmlns:bf="http://id.loc.gov/ontologies/bibframe/"
+           xmlns:bflc="http://id.loc.gov/ontologies/bflc/"
+           xmlns:owl="http://www.w3.org/2002/07/owl#"
+           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+           xmlns:dcterms="http://purl.org/dc/terms/"
+           xmlns:cc="http://creativecommons.org/ns#"
+           xmlns:foaf="http://xmlns.com/foaf/0.1/"
+           targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+    <!-- Root element -->
+    <xs:element name="RDF" type="rdf:RDFType"/>
+
+    <!-- RDF Type -->
+    <xs:complexType name="RDFType">
+        <xs:sequence>
+            <xs:element name="Description" type="rdf:DescriptionType" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="about" type="xs:anyURI" use="optional"/>
+    </xs:complexType>
+
+    <!-- Description Type -->
+    <xs:complexType name="DescriptionType">
+        <xs:sequence>
+            <xs:element name="type" type="rdf:TypeType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="instanceOf" type="rdf:InstanceOfType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="hasInstance" type="rdf:HasInstanceType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="hasItem" type="rdf:HasItemType" minOccurs="0" maxOccurs="2"/>
+            <xs:element name="adminMetadata" type="rdf:AdminMetadataType" minOccurs="2" maxOccurs="3"/>
+        </xs:sequence>
+        <xs:attribute name="about" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+
+    <!-- Type Type -->
+    <xs:complexType name="TypeType">
+        <xs:attribute name="resource" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+
+    <!-- InstanceOf Type -->
+    <xs:complexType name="InstanceOfType">
+        <xs:attribute name="resource" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+
+    <!-- HasInstance Type -->
+    <xs:complexType name="HasInstanceType">
+        <xs:attribute name="resource" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+
+    <!-- HasItem Type -->
+    <xs:complexType name="HasItemType">
+        <xs:attribute name="resource" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+
+    <!-- AdminMetadata Type -->
+    <xs:complexType name="AdminMetadataType">
+        <xs:sequence>
+            <!-- Define elements according to LC's documentation -->
+            <!-- Example: -->
+            <xs:element name="descriptionConventions" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="descriptionLanguage" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <!-- Add other elements as needed -->
+        </xs:sequence>
+        <xs:attribute name="about" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+
+</xs:schema>
