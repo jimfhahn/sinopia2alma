@@ -1,3 +1,4 @@
 *.xml
 *.rdf
 __pycache__/
+*.code-workspace

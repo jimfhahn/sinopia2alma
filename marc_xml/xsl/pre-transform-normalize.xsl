@@ -33,6 +33,21 @@
   </bf:PrimaryContribution>
 </xsl:template>
 
+  <!-- Template to handle bf:date elements and add rdf:datatype attribute -->
+  <xsl:template match="bf:date" xmlns:bf="http://id.loc.gov/ontologies/bibframe/">
+    <xsl:element name="bf:date">
+      <xsl:attribute name="rdf:datatype">http://id.loc.gov/datatypes/edtf</xsl:attribute>
+      <xsl:apply-templates select="node()"/>
+    </xsl:element>
+  </xsl:template>
+
+    <!-- Template to handle incorrect ns1:relationship elements and replace with bflc:relationship -->
+    <xsl:template match="*[namespace-uri()='ttp://id.loc.gov/ontologies/bflc/' and local-name()='relationship']">
+      <bflc:relationship>
+        <xsl:apply-templates select="@*|node()"/>
+      </bflc:relationship>
+    </xsl:template>
+
 <!-- the following will make sure edtf does not have trailing slash if it is present  -->
 
 <xsl:template match="bf:date/@rdf:datatype" xmlns:bf="http://id.loc.gov/ontologies/bibframe/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">

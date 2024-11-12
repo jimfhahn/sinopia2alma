@@ -1,37 +1,45 @@
 from rdflib import Graph, Namespace, URIRef
-from rdflib.namespace import RDF
 from name_space.alma_ns import alma_namespaces
-from marc_xml import instance_xml_modifier
+import sys
+import lxml.etree as ET
 
 
-def lc_bfxml_instance(uri):
-    filename = "lc_bfxml_instance.xml"
-    instance_uri = uri
+def lc_bfxml_instance(instance_uri):
     instance_uri = URIRef(instance_uri)
     work_uri = None
     instance_graph = Graph()
-    work_graph = Graph()
     instance_graph.parse(instance_uri)
-
     # Define the bf and bflc namespaces
     bf = Namespace("http://id.loc.gov/ontologies/bibframe/")
+    # Bind the namespaces to the instance graph
     for prefix, url in alma_namespaces:
         instance_graph.bind(prefix, url)
+    # Get the work URI from the instance graph
     work_uri = instance_graph.value(subject=instance_uri, predicate=bf.instanceOf)
+    # check if the work_uri is none
+    if work_uri is None:
+        print("No work URI found for this instance.")
+        sys.exit()
+
+    # Ensure work_uri is a URIRef
     work_uri = URIRef(work_uri)
-    # Explicitly state that work_uri is of type bf:Work
-    work_graph.add((work_uri, RDF.type, bf.Work))
-    # add the work to the instance graph
-    instance_graph.add((instance_uri, bf.instanceOf, work_uri))
-    # serialize the instance graph
-    instance_xml = instance_graph.serialize(format="pretty-xml", encoding="utf-8")
 
-    # write the instance graph to a file
-    with open(filename, "wb") as file:
-        file.write(instance_xml)
+    # Remove any triples where work_uri is the subject
+    instance_graph.remove((work_uri, None, None))
+    # Serialize the instance graph
+    instance_alma_xml = instance_graph.serialize(format="pretty-xml", encoding="utf-8")
 
-    # run the instance graph through the instance_xml_modifier
-    instance_xml_modifier.modify_xml(filename, filename)
+    tree = ET.fromstring(instance_alma_xml)
+    # apply xslt to normalize instance
+    xslt = ET.parse("marc_xml/xsl/normalize-instance-sinopia2alma.xsl")
+    transform = ET.XSLT(xslt)
+    instance_alma_xml = transform(tree)
+    instance_alma_xml = ET.tostring(
+            instance_alma_xml, pretty_print=True, encoding="utf-8"
+            )
+    # save the xml to a file
+    with open("lc_bfxml_instance.xml", "wb") as f:
+        f.write(instance_alma_xml)
 
 
 def remove_rdf_header():
