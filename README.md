@@ -1,4 +1,4 @@
-# sinopia2alma
+# sinopia2alma [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jimfhahn/sinopia2alma/main)
 A collection of Jupyter notebooks to convert Sinopia RDF to Alma RDF/XML and MARCXML. Also includes a pilot test to generate OCLC RDF from Alma BF.
 
 ### Before running, add a .env file to the root directory with the following:
@@ -28,7 +28,6 @@ Note: In the notebook replace the URI with your sinopia Instance URI. The setup 
 ## Alma BF to OCLC (experimental)
 This is a pilot test to generate [OCLC RDF structure](https://help.oclc.org/Metadata_Services/WorldShare_Collection_Manager/Data_sync_collections/Prepare_your_data/Structure_BIBFRAME_data) from Alma BF. Available by way of an SRU query, examples in the almabf2oclc.ipynb notebook.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jimfhahn/sinopia2alma/main)
 
 ## Notebooks
 * [work_alma.ipynb](https://github.com/jimfhahn/sinopia2alma/blob/main/work2alma.ipynb)
