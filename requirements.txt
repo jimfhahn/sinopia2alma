@@ -1,2 +1,2 @@
-lxml==5.1.0
+lxml
 rdflib==7.0.0
