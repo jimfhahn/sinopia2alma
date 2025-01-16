@@ -4,7 +4,7 @@ A collection of Jupyter notebooks to convert Sinopia RDF to Alma RDF/XML and MAR
 ### Before running, add a .env file to the root directory with the following:
 ```
 ALMA_API_KEY="apikey"
-ALMA_API_HOST="url"
+ALMA_URI_REGION="url"
 ```
 Region details and API key generation for your Alma system can be found here: [Alma Developer Network](https://developers.exlibrisgroup.com/alma/apis). Consider using Alma Sandbox API for testing. The API key should have read/write permissions for bib operations.
 ### Region info:
